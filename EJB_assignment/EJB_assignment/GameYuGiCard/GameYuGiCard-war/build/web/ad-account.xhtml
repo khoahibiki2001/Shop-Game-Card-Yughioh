@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+            .navbar {
+                margin-bottom: 0;
+                border-radius: 0;
+            }
+
+            /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+            .row.content {height: 450px}
+
+            /* Set gray background color and 100% height */
+            .sidenav {
+                padding-top: 20px;
+                background-color: #f1f1f1;
+                height: 100%;
+            }
+
+            /* Set black background color, white text and some padding */
+            footer {
+                background-color: #555;
+                color: white;
+                padding: 15px;
+            }
+
+            /* On small screens, set height to 'auto' for sidenav and grid */
+            @media screen and (max-width: 767px) {
+                .sidenav {
+                    height: auto;
+                    padding: 15px;
+                }
+                .row.content {height:auto;} 
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="#">Logo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="index.xhtml">Product</a></li>
+                        <li><a href="#">Admin Products </a></li>
+                        <li><a href="ad-orders.xhtml">Admin Orders</a></li>
+                        <li><a href="ad-account.xhtml">Admin Account of Customer</a></li>
+
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="login.xhtml"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="signup.xhtml"><span class="glyphicon glyphicon-log-in"></span> SignUp</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid text-center">    
+            <div class="row content">
+                <div class="col-sm-2 sidenav">
+                    <p><a href="#">Link</a></p>
+                    <p><a href="#">Link</a></p>
+                    <p><a href="#">Link</a></p>
+                </div>
+                <div class="col-sm-6 text-center"> 
+        <h:form >               
+            <div class="table-content table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="product-thumbnail">ID Customer</th>
+                            <th class="product-name">Name</th>
+                            <th class="product-price">Email</th>
+                            <th class="product-quantity" >Username</th>
+                            <th class="product-subtotal">Password</th>
+                            <th class="product-subtotal">Phone</th>
+                            <th class="product-remove">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="item" items="#{customersMB.allKhachHang()}">
+                            <tr>
+                                <td >#{item.customerID}</td>
+                                <td >#{item.customerName}</td>
+                                <td >#{item.customerAddress}</td>
+                                <td >#{item.customerUserName}</td>
+                                <td >#{item.customerPassWord}</td>
+                                <td >#{item.cutomerPhone}</td>
+                                <td class="product-remove"><h:commandLink action="#{customersMB.delete(item.customerID)}"><h2>Delete</h2></h:commandLink></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12 smt-40 xmt-40">
+                    <div class="htc__cart__total">
+                        <h6>ADD Customer account</h6>
+                        <br></br>
+                        <br></br>
+
+                        <!--                        <h:outputText value="   Name   : "/>
+                                                <h:inputText id="name" value="#{customersMB.cname}" />
+                                                <h:message for="name"/>
+                                                <br></br><br></br>
+                                                <h:outputText value="  Email   : "/>
+                                                <h:inputText id="email" value="#{customersMB.cemail}" />
+                                                <h:message for="email"/>
+                                                <br></br><br></br>
+                                                <h:outputText value="Username:  "/>
+                                                <h:inputText id="username" value="#{customersMB.username}" />
+                                                <h:message for="username"/>
+                                                <br></br>
+                                                <br></br>
+                                                <h:outputText value="Password:  "/>        
+                                                <h:inputText id="password" value="#{customersMB.password}" />
+                                                <h:message for="password"/>    
+                                                <br></br>
+                                                <br></br>
+                                                <h:outputText value=" Phone   : "/>
+                                                <h:inputText id="phone" value="#{customersMB.cphone}" />
+                                                <h:message for="phone"/>
+                                                <br></br>
+                                                <br></br>
+                                                <h:outputText style="color: red" value="#{customersMB.message}"/>-->
+
+                        <h:outputText value="   Name   : "/><h:inputText style="width: 18%" id="name" value="#{customersMB.cname}" required="true" requiredMessage="Must not be empty"/>
+                        <h:message for="name"/>
+                        <br></br><br></br>
+                        <h:outputText value="  Email   : "/><h:inputText style="width: 18%" id="email" value="#{customersMB.cemail}" required="true" requiredMessage="Must not be empty"/>
+                        <h:message for="email"/>
+                        <br></br><br></br>
+                        <br></br><h:outputText value=" Phone   : "/><h:inputText style="width: 18%" id="phone" value="#{customersMB.cphone}" required="true" requiredMessage="Must not be empty"/>
+                        <h:message for="phone"/>
+                        <br></br>
+                        <br></br>
+                        <h:outputText value="Username:  "/><h:inputText style="width: 18%" id="username" value="#{customersMB.username}" required="true" requiredMessage="Must not be empty"/>
+                        <h:message for="username"/>
+                        <br></br>
+                        <br></br>
+                        <h:outputText value="Password:  "/>        
+                        <h:inputText id="password" style="width: 18%" value="#{customersMB.password}" required="true" requiredMessage="Must not be empty"/>
+                        <h:message for="password"/>    
+                        <br></br>
+
+                        <h:outputText style="color: red" value="#{customersMB.message}"/><br></br>
+                        <ul class="payment__btn">
+
+                            <h:commandButton id="add" styleClass="fr__btn"   action="#{customersMB.add()}" value="Add"/>  &nbsp; &nbsp; &nbsp;
+                            <h:commandButton id ="edit" styleClass="fr__btn"   action="#{customersMB.edit()}" value="Edit"/> 
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="ht__coupon__code">
+                        <span>Enter customer ID:</span>
+                        <div class="coupon__box">
+                            <h:selectOneMenu value="#{customersMB.selectIDvarchar}" style="width: 50%;height: 55px;padding-left: 10%" >
+                                <f:selectItems value="#{customersMB.allKhachHang()}" var="itemC" itemValue="#{itemC.customerID}" itemLabel="#{itemC.customerID}"/>
+
+                            </h:selectOneMenu>
+                            <div class="ht__cp__btn">
+                                <h:commandButton styleClass="fr__btn" style="background-color: palevioletred"  action="#{customersMB.find()}" value="Find"/> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </h:form> 
+         </div>
+
+            </div>
+
+        </div>
+
+        <footer class="container-fluid text-center">
+            <p><h2>Host Line :</h2> 0848195490</p>
+            <p><h2>Address: </h2>195 3/2 street, Hung Loi ward, Ninh Kieu district, Can Tho city</p>
+            <p><h2> Email: </h2> takhoaa20073@cusc,ctu.edu.vn</p>
+        </footer>
+    </h:body>
+</html>
+
